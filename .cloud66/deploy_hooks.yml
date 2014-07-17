@@ -1,0 +1,7 @@
+development:
+    first_thing:
+        command: sudo npm install -g bower
+        target: rails
+    after_symlink:
+        command: cd $STACK_PATH && yes | bower install --allow-root
+        target: rails
