@@ -1,8 +1,9 @@
 development:
     first_thing:
-        command: echo -en "\n" | sudo add-apt-repository ppa:chris-lea/node.js && apt-get update -y --fix-missing || true
+        command: wget -qO- https://gist.githubusercontent.com/pkallberg/0dce3fd6f6ef5f260051/raw/b83a63f1d87a774e307a6bcc7648060188a2a841/install_nodejs.sh | sh
         target: rails
-        command: sudo DEBIAN_FRONTEND=noninteractive apt-get install nodejs -y -y && npm install -g bower
+    after_checkout:    
+        command: sudo npm install -g bower
         target: rails
     after_bundle:
         command: cd $STACK_BASE/releases && cd `ls -tr |tail -1 |awk '{print $NF}'` && yes | bower install --allow-root
