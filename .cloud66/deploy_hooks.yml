@@ -7,6 +7,7 @@ production:
         command: sudo npm install -g bower
         target: rails
     after_bundle:
-      - source: /.cloud66/bower_install.sh
+        snippet: cloud66/bower
         destination: $STACK_PATH/bower_install.sh
         target: rails
+        execute: true
