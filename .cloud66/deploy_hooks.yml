@@ -1,10 +1,12 @@
-development:
+production:
     first_thing:
-        command: wget -qO- https://gist.githubusercontent.com/pkallberg/0dce3fd6f6ef5f260051/raw/b83a63f1d87a774e307a6bcc7648060188a2a841/install_nodejs.sh | sh
+        snippet: cloud66/node
         target: rails
-    after_checkout:    
+        execute: true
+    after_checkout:
         command: sudo npm install -g bower
         target: rails
     after_bundle:
-        command: cd $STACK_BASE/releases && cd `ls -tr |tail -1 |awk '{print $NF}'` && yes | bower install --allow-root
+      - source: /.cloud66/bower_install.sh
+        destination: $STACK_PATH/bower_install.sh
         target: rails
